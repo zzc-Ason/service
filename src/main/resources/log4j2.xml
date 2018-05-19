@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="MyApp" packages="">
+    <Properties>
+        <Property name="logPath">/data/logs</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="roll_appender" fileName="${sys:logPath}/log.log" filePattern="${sys:logPath}/log-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%-5level %d [%t] [%X{uuid}] [%X{user}] %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+        <Async name="Async" bufferSize="1024">
+            <AppenderRef ref="roll_appender"/>
+        </Async>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%-5level %d [%t] [%X{uuid}] [%X{user}] %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.ason" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <!--<AppenderRef ref="Async"/>-->
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <!--<AppenderRef ref="Async"/>-->
+        </Root>
+    </Loggers>
+</Configuration>
