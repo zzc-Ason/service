@@ -12,6 +12,6 @@ public class ClientTest {
 
     public static void main(String[] args) throws ClassNotFoundException {
         Hello result = Client.getRemoteProxyObj(Class.forName("com.ason.service.Hello"), new InetSocketAddress("47.94.240.103", 9999));
-        System.out.println(result.sayHello("Tom"));;
+        System.out.println(result.sayHello("Tom"));
     }
 }
